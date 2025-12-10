@@ -1,0 +1,117 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is shovona. How can I assist you today?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "df172d5e-c9da-4824-8cca-8ae9e918d6a7",
+      "name": "When chat message received",
+      "webhookId": "55b96e97-5076-489b-bbe4-727060161d23"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=you are a mental health expert having an experience of 10 years,you will always reply is bangla,always icon or emoji\nuser message:  {{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5345db9d-e78d-4f8e-860c-d3242f58f6e7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "18082967-ef82-4ace-a24b-020269d21758",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "u4mJ3UuWzqqW8Wrb",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "a1d7ecd8-b401-45c5-a87b-d69a126831a0",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "b7406bcd-2746-442b-a201-ed3d223fe8c1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf0a945cf9385e64992b78e915735fbd9f469aac8dfd290cfacd41f7879e5aac"
+  },
+  "id": "jBvLRmSaM2n2Kp5L",
+  "tags": []
+}
