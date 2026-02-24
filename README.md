@@ -16,7 +16,7 @@ The workflow demonstrates how conversational input or structured data can be pro
 * Routes workflow execution based on AI-generated output.
 * Supports API calls, data transformation, and external service integrations.
 * Fully modular and extendable.
-* Requires minimal coding due to n8n’s visual interface.
+* Requires minimal coding due to n8n’s visual interface...
 
 ---
 
